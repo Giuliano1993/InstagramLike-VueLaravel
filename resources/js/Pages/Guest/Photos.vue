@@ -2,15 +2,22 @@
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import InteractivePhotoGallery from '@/Components/InteractivePhotoGallery.vue';
 import FrontendLayout from '@/Layouts/FrontendLayout.vue'
-defineProps({
+const props = defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
-    photos: Array
+    photos: Array,
+    likes: Array
 });
+var mappedLikes = {}
+props.likes.forEach(like => {
+    if(like.likes) mappedLikes[like.photo_id] = like.likes
+});
+
+console.log(mappedLikes);
 </script>
 
 <template>
     <FrontendLayout :canLogin="canLogin" :canRegister="canRegister">
-        <InteractivePhotoGallery :photos="photos"></InteractivePhotoGallery>
+        <InteractivePhotoGallery :photos="photos" :likes="mappedLikes"></InteractivePhotoGallery>
     </FrontendLayout>
 </template>

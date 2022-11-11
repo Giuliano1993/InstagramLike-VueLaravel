@@ -1,12 +1,14 @@
 <script>
 import { defineComponent } from 'vue';
 import DialogModal from '@/Components/DialogModal.vue';
+import LikeButton from '@/Components/LikeButton.vue';
 
 
 
 export default defineComponent({
     components:{
-        DialogModal
+        DialogModal,
+        LikeButton
     },
     data() {
         return{
@@ -15,7 +17,8 @@ export default defineComponent({
         }
     },
     props:{
-        photos: Array
+        photos: Array,
+        likes: Object
     },
     methods:{
         openPicModal(photo){
@@ -27,9 +30,14 @@ export default defineComponent({
 </script>
 
 <template>
-    <section class="photos grid grid-cols-1 md:grid-cols-2">
-        <div v-for="p in photos" :key="p.id" class="card mx-3 p-6" @click="()=>openPicModal(p)">
-            <img :src="p.path"/>
+    <section class="photos grid grid-cols-1">
+        <div v-for="p in photos" :key="p.id" class="card mx-3 p-6 rounded-md bg-white my-3 drop-shadow-md" >
+            <span v-if="p.user" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                <img class="h-11 w-11 rounded-full object-cover" :src="p.user.profile_photo_url"> 
+                <b class="text-black text-lg ml-4 self-center">{{p.user.name}}</b>
+            </span>
+            <img :src="p.path" @click="()=>openPicModal(p)"/>
+            <LikeButton class="mt-3" :user="$page.props.user" :photo="p.id" :liked="likes.hasOwnProperty(p.id)"></LikeButton>
         </div>
     </section>    
     <DialogModal :show="showModal" @close="showModal = false">
@@ -44,28 +52,7 @@ export default defineComponent({
 </template>
 
 <style scoped>
-    img{
+    .photos img{
         cursor:pointer;
-        animation: scale-down-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    }
-    img:hover{
-        
-        animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    }
-    @keyframes scale-up-center {
-        0% {
-            transform: scale(1);
-        }
-        100% {
-            transform: scale(1.2);
-        }
-    }
-    @keyframes scale-down-center {
-        0% {
-            transform: scale(1.2);
-        }
-        100% {
-            transform: scale(1);
-        }
     }
 </style>

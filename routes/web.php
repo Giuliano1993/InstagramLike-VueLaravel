@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Like;
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Photo;
 use Illuminate\Http\Request;
@@ -27,11 +29,12 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('guest/photos',function(){
+Route::get('guest/photos',function(Request $request){
     return Inertia::render('Guest/Photos',[
-        'photos'=>Photo::all(),
+        'photos'=>Photo::orderByDesc('id')->get()->load('user'),
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
+        'likes'=>!is_null($request->user()) ? Like::where('user_id',$request->user()->id)->get() : []
     ]);
 })->name('guest.photos');
 
@@ -46,9 +49,10 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('admin/photos',function(){
+    Route::get('admin/photos',function(Request $request){
+        $user = $request->user();
         return Inertia::render('Admin/Photos',[
-            'photos'=>Photo::orderByDesc('id')->get(),
+            'photos'=>$user->photos,
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
         ]);
@@ -65,6 +69,7 @@ Route::middleware([
         ]);
         $path = Storage::disk('public')->put('photos', $request->file('path'));
         $validate_data['path'] = '/storage/'.$path;
+        $validate_data['user_id'] = $request->user()->id;
         Photo::create($validate_data);
         return to_route('admin.photos');
     })->name('admin.photos.store');
@@ -98,5 +103,23 @@ Route::middleware([
         $photo->delete();
         return response()->json('ok');
     })->name('admin.photos.delete');
+
+    Route::post('{user}/like/{photo}',function(User $user, Photo $photo){
+        $pars = [
+            'user_id'=>$user->id,
+            'photo_id'=>$photo->id,
+        ];
+        $like = Like::where('user_id', $user->id)->where('photo_id', $photo->id)->first();
+
+        if(!is_null($like) && !empty($like)){
+            $like->likes = !$like->likes;
+            $like->update();
+            return response()->json('ok');
+        }else{
+            $pars['likes'] = true;
+            Like::create($pars);
+            return response()->json('ok');
+        }
+    })->name('user.like.toggle');
 
 });
