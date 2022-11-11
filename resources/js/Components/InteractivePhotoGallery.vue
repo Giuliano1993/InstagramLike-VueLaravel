@@ -43,7 +43,7 @@ export default defineComponent({
     </DialogModal>    
 </template>
 
-<style>
+<style scoped>
     img{
         cursor:pointer;
         animation: scale-down-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
