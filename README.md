@@ -5,15 +5,25 @@ The thing's ongoing, but feel free to copy this repo and make it your own.
 
 In this project you're gonna use:
 
-### Frontend
+#### Frontend
 - [Vue](https://vuejs.org/)
 - [Tailwind](https://tailwindcss.com/)
 
-### Backend
+#### Backend
 - [Laravel](https://laravel.com/) ( with [Jetstream](https://jetstream.laravel.com/) and [Inertia](https://inertiajs.com/) )
 
-### structure
+#### structure
 - [Docker](https://docker.com/) ( under the Sail method from Laravel)
 
 
-## Enjoy
+### TO DO 
+- [ ] Lazy Loading posts
+- [ ] Pictures Loading 
+- [ ] Improve backend desgin
+- [ ] User Search
+
+
+
+
+
+### Enjoy
