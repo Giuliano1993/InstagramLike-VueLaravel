@@ -12,8 +12,6 @@ var mappedLikes = {}
 props.likes.forEach(like => {
     if(like.likes) mappedLikes[like.photo_id] = like.likes
 });
-
-console.log(mappedLikes);
 </script>
 
 <template>
