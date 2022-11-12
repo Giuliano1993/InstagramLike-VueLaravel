@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Storage;
+use App\Actions\Photos\GetPhotosForPaging;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +31,9 @@ Route::get('/', function () {
 });
 
 Route::get('guest/photos',function(Request $request){
+    $photos = GetPhotosForPaging::get();
     return Inertia::render('Guest/Photos',[
-        'photos'=>Photo::orderByDesc('id')->get()->load('user'),
+        'photos'=>$photos,
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'likes'=>!is_null($request->user()) ? Like::where('user_id',$request->user()->id)->get() : []

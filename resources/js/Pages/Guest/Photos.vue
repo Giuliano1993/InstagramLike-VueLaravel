@@ -1,11 +1,11 @@
 <script setup>
-import { Head, Link } from '@inertiajs/inertia-vue3';
 import InteractivePhotoGallery from '@/Components/InteractivePhotoGallery.vue';
 import FrontendLayout from '@/Layouts/FrontendLayout.vue'
+
 const props = defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
-    photos: Array,
+    photos: Object,
     likes: Array
 });
 var mappedLikes = {}
