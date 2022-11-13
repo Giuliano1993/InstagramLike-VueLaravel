@@ -9,7 +9,8 @@ export default defineComponent({
     data(){
         return{
             like : this.$attrs.liked,
-            activeAnimation : false
+            activeAnimation : false,
+            likesCount: this.$attrs.likesCount
             
         }
     },
@@ -30,7 +31,12 @@ export default defineComponent({
 
 
 <template>
-    <img :src="!like ? '/pictures/not-like.png' : '/pictures/like.png'" @click="()=>likeClicked()" :class="{active:activeAnimation}" />
+
+    <div class="flex">
+        <img v-if="$page.props.user" :src="!like ? '/pictures/not-like.png' : '/pictures/like.png'" @click="()=>likeClicked()" :class="{active:activeAnimation}" />
+        <b class="inline-block ml-3" v-if="likesCount > 0">{{likesCount}} liked this</b>
+        
+    </div>
 </template>
 
 <style scoped>

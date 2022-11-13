@@ -21,16 +21,7 @@ use App\Actions\Photos\GetPhotosForPaging;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('guest/photos',function(Request $request){
+Route::get('/',function(Request $request){
     $photos = GetPhotosForPaging::get();
     return Inertia::render('Guest/Photos',[
         'photos'=>$photos,

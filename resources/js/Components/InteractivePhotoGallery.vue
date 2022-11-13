@@ -36,7 +36,6 @@ export default defineComponent({
                 preserveState: true,
                 only: ['photos'],
                 onSuccess: ()=>{
-                    console.log('called')
                     this.allPhotos = [...this.allPhotos,...this.photos.data]
                     window.history.replaceState({}, this.$page.title, this.initialUrl) 
 
@@ -65,7 +64,7 @@ export default defineComponent({
                 <b class="text-black text-lg ml-4 self-center">{{p.user_name}}</b>
             </Link>
             <img class="mx-auto" :src="p.path" @click="()=>openPicModal(p)"/>
-            <LikeButton class="mt-3" :user="$page.props.user" :photo="p.id" :liked="likes.hasOwnProperty(p.id)"></LikeButton>
+            <LikeButton class="mt-3" :user="$page.props.user" :photo="p.id" :likesCount="p.like_count" :liked="likes.hasOwnProperty(p.id)"></LikeButton>
         </div>
         <span class="mb-4" ref="loadMoreIntersect"></span> 
     </section>    
