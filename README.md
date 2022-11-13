@@ -17,7 +17,7 @@ In this project you're gonna use:
 
 
 ### TO DO 
-- [ ] Lazy Loading posts
+- [x] Lazy Loading posts
 - [ ] Pictures Loading 
 - [ ] Improve backend desgin
 - [ ] User Search

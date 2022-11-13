@@ -41,6 +41,16 @@ Route::get('guest/photos',function(Request $request){
 })->name('guest.photos');
 
 
+Route::get('guest/profile/{user}',function(User $user, Request $request){
+    return Inertia::render('Admin/Photos',[
+        'photos'=>$user->photos,
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'isLoggedInUser'=>!is_null($request->user()) && $request->user()->id === $user->id
+    ]);
+})->name('guest.profile');
+
+
 
 Route::middleware([
     'auth:sanctum',
@@ -51,7 +61,7 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('admin/photos',function(Request $request){
+    Route::get('admin/profile',function(Request $request){
         $user = $request->user();
         return Inertia::render('Admin/Photos',[
             'photos'=>$user->photos,
