@@ -18,8 +18,8 @@ In this project you're gonna use:
 
 ### TO DO 
 - [x] Lazy Loading posts
-- [ ] Pictures Loading 
-- [ ] Improve backend desgin
+- [x] Improve backend desgin
+- [ ] Users Relationships (follows)
 - [ ] User Search
 
 
