@@ -36,18 +36,18 @@ function switchModalVisibilit(){
 <template>
     <AppLayout title="Photos">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-100 leading-tight">
                 Profile
             </h2>
             
             <Link v-if="isLoggedInUser" :href="route('admin.photos.create')" class="hover:bg-blue-700 bg-gradient-to-r from-sky-600 to-blue-900 text-white font-bold py-2 px-4 rounded-full">+</Link>
         </template>
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="mx-auto sm:px-6 lg:px-8">
+                <div class="bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="grid grid-cols-3">
                         <div v-for="photo in photoLoop" :key="photo.id" class="galleryPhotoDiv p-1 w-30 h-30 overflow-hidden">
-                            <img :src="photo.path" @click="()=>selectPhoto(photo)" />
+                            <img class="mx-auto" :src="photo.path" @click="()=>selectPhoto(photo)" />
                         </div>
 
                     </div>
@@ -98,12 +98,12 @@ function switchModalVisibilit(){
         width: 30vW;
         height: 30vW;
         text-align: center;
-        display: flex;
         justify-content:space-around;
         
     }
     .galleryPhotoDiv img{
         cursor:pointer;
+        width:100%;
     }
     .actionBtn{
         width: 25px

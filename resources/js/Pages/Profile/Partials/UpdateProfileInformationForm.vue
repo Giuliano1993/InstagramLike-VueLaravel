@@ -83,7 +83,7 @@ const clearPhotoFileInput = () => {
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            <p class="text-white">Update your account's profile information and email address.</p>
         </template>
 
         <template #form>
