@@ -2,6 +2,7 @@
 import InteractivePhotoGallery from '@/Components/InteractivePhotoGallery.vue';
 import FrontendLayout from '@/Layouts/FrontendLayout.vue'
 
+
 const props = defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
@@ -10,6 +11,7 @@ const props = defineProps({
 });
 console.log(props.photos)
 var mappedLikes = {}
+
 props.likes.forEach(like => {
     if(like.likes) mappedLikes[like.photo_id] = like.likes
 });
@@ -18,5 +20,6 @@ props.likes.forEach(like => {
 <template>
     <FrontendLayout :canLogin="canLogin" :canRegister="canRegister">
         <InteractivePhotoGallery :photos="photos" :likes="mappedLikes"></InteractivePhotoGallery>
+        
     </FrontendLayout>
 </template>

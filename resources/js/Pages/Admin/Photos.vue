@@ -40,7 +40,7 @@ function switchModalVisibilit(){
                 Profile
             </h2>
             
-            <Link v-if="isLoggedInUser" :href="route('admin.photos.create')" class="hover:bg-blue-700 bg-gradient-to-r from-sky-600 to-blue-900 text-white font-bold py-2 px-4 rounded-full">+</Link>
+            <Link v-if="isLoggedInUser" :href="route('admin.photos.create')" class=" bg-gradient-to-r from-green-300 to-green-700 hover:bg-gradient-to-r hover:from-green-600 hover:to-green-900 text-white font-bold py-2 px-4 rounded-full">+</Link>
         </template>
         <div class="py-12">
             <div class="mx-auto sm:px-6 lg:px-8">

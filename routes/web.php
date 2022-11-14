@@ -5,6 +5,7 @@ use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Storage;
@@ -76,6 +77,13 @@ Route::middleware([
         Photo::create($validate_data);
         return to_route('admin.photos');
     })->name('admin.photos.store');
+
+    Route::get('user/search',function(Request $request){
+        
+        $users = DB::table('users')->where('name','LIKE','%'.$request->get('search').'%')
+                      ->get();
+        return response()->json($users);
+    })->name('search.user');
 
     Route::get('admin/photos/{id}/edit',function($id){
         return Inertia::render('Admin/EditPhoto',[

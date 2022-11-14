@@ -1,11 +1,13 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
-
+import UserSearch from '@/Components/UserSearch.vue'
+import { ref } from 'vue';
 
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
 });
+const showSearch = ref(false);
 </script>
 
 <template>
@@ -15,6 +17,9 @@ defineProps({
         <div v-if="canLogin" class="hidden fixed bottom-0 right-0 px-6 py-4 sm:block z-50">
             <template v-if="$page.props.user">
                 <div class="mx-auto rounded flex justify-around px-3 py-5 menubox">
+                    <a href="#" @click.prevent="()=> showSearch = !showSearch" class="mr-4 text-sm text-black bg-zinc-200 shadow-md rounded-full p-3">
+                        <img src="/pictures/search.png"/>
+                    </a>
                     <Link  :href="route('admin.photos')" class="flex-start mr-4 text-sm text-black bg-zinc-200 shadow-md rounded-full p-3">
                         <img src="/pictures/profile.png"/>
                     </Link>
@@ -34,6 +39,9 @@ defineProps({
             </div>
         </div>
     </div>
+    <div id="showSearchBox" v-show="showSearch" class="fixed inset-x-0 left-1/4 right-1/4 top-1/2 w-50">
+        <UserSearch></UserSearch>
+    </div>
 </template>
 
 <style scoped>
@@ -41,6 +49,9 @@ defineProps({
     width:30px
 }
 .menubox a{
+    z-index: 99999999;
+}
+#showSearchBox{
     z-index: 99999999;
 }
 </style>
