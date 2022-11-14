@@ -20,7 +20,7 @@ In this project you're gonna use:
 - [x] Lazy Loading posts
 - [x] Improve backend desgin
 - [ ] Users Relationships (follows)
-- [ ] User Search
+- [x] User Search
 
 
 
